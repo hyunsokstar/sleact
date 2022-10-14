@@ -8,11 +8,7 @@ declare const module: any;
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  // await app.listen(3000);
   const port = process.env.PORT || 3000;
-  await app.listen(port);
-  console.log(`listening on port  ${port}`);
-
 
   //  ========== swager 설정 start ==============
   const config = new DocumentBuilder()
@@ -25,6 +21,10 @@ async function bootstrap() {
     const document = SwaggerModule.createDocument(app, config);
     SwaggerModule.setup('api', app, document);
     //  ========== swager 설정 end ==============
+
+  await app.listen(port);
+  console.log(`listening on port  ${port}`);
+
 
 
   if (module.hot) {
