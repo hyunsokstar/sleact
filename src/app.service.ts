@@ -6,6 +6,6 @@ export class AppService {
   constructor(private readonly configService: ConfigService) {}
 
   getHello(): string {
-    return this.configService.get("SECRET"); // process.env._SECRET
+    return this.configService.get("DEFAULT_MESSAGE"); // process.env._SECRET
   }
 }
