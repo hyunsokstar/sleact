@@ -1,9 +1,12 @@
+import { UndefinedToNullInterceptor } from './../common/interceptors/undefinedToNull.interceptor';
 import { UsersService } from './users.service';
 import { JoinRequestDto } from './dto/join.request.dto';
-import { Body, Controller, Get, Post, Req, Res } from '@nestjs/common';
+import { Body, Controller, Get, Post, Req, Res, UseInterceptors } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { UserDto } from 'src/common/dto/user.dto';
+import { User } from 'src/common/decorators/user.decorator';
 
+@UseInterceptors(UndefinedToNullInterceptor)
 @ApiTags('USER')
 @Controller('api/users')
 export class UsersController {
@@ -18,9 +21,10 @@ export class UsersController {
     status: 500,
     description: '서버 에러',
   })
+
   @ApiOperation({ summary: '내 정보 조회' })
   @Get()
-  getUsers(@Req() req) {
+  getUsers(@User() user) {
     console.log('get user 요청 확인');
     return 'get user 요청 확인';
   }
@@ -43,8 +47,8 @@ export class UsersController {
   })
   @ApiOperation({ summary: '로그인' })
   @Post('login')
-  logIn(@Req() req) {
-    return req.user;
+  logIn(@User() user) {
+    return user;
   }
 
   @ApiOperation({ summary: '로그아웃' })
@@ -55,3 +59,6 @@ export class UsersController {
     res.send('ok');
   }
 }
+
+
+// npm i typeorm-model-generator -D
