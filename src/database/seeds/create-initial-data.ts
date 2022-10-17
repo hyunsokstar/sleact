@@ -11,7 +11,7 @@ export class CreateInitialData implements Seeder {
       .createQueryBuilder()
       .insert()
       .into(Workspaces)
-      .values([{ id: 1, name: '', url:'select' }])
+      .values([{ id: 1, name: 'Sleact', url:'select' }])
       .execute();
 
     await connection
