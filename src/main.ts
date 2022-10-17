@@ -2,12 +2,17 @@ import { APP_FILTER, NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
+import { HttpExceptionFilter } from 'http-exception.filter';
 
 declare const module: any;
 
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  app.useGlobalFilters(new HttpExceptionFilter());
+
+
   const port = process.env.PORT || 3000;
 
   //  ========== swager 설정 start ==============

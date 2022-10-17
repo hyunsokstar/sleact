@@ -28,13 +28,17 @@ export class UsersController {
     console.log('get user 요청 확인');
     return 'get user 요청 확인';
   }
-  
+
 
 
   @ApiOperation({ summary: '회원 가입' })
   @Post()
-  postUsers(@Body() data: JoinRequestDto) {
-    const reponse = this.userService.postUsers(
+  async postUsers(@Body() data: JoinRequestDto) {
+
+    console.log("회원 가입 신청 확인 !");
+    
+
+    const reponse = await this.userService.postUsers(
       data.email,
       data.nickname,
       data.password,
