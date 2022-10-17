@@ -21,4 +21,4 @@ export class CreateInitialData implements Seeder {
       .values([{ id: 1, name: '일반', WorkspaceId: 1, private: false }])
       .execute();
   }
-}
+} 
